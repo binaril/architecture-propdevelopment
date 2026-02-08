@@ -1,0 +1,63 @@
+﻿apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: main_devops-cluster-admin
+subjects:
+  - kind: User
+    name: main_devops
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: analyst-viewer
+subjects:
+  - kind: User
+    name: analyst
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: viewer
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devops-admin
+  namespace: dev
+subjects:
+  - kind: User
+    name: devops
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: devops-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: developer-editor
+  namespace: dev
+subjects:
+  - kind: User
+    name: developer
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: editor
+  apiGroup: rbac.authorization.k8s.io
+
+---
